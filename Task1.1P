@@ -1,0 +1,24 @@
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode (9, OUTPUT);
+}
+
+void loop()
+{
+  int lightlevel;
+  lightlevel = analogRead(0);
+  Serial.println(lightlevel);
+  if (lightlevel < 300){
+    digitalWrite(9, HIGH);
+    Serial.println("ON");
+  }
+  
+  else
+  {
+    digitalWrite(9, LOW);
+    Serial.println("OFF");
+  }
+  delay(3000);
+  
+}
