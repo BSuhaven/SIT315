@@ -1,0 +1,30 @@
+volatile byte state = LOW;
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode (9, OUTPUT);
+  pinMode(2, INPUT_PULLUP);
+  pinMode(8, OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(2), light, CHANGE);
+}
+
+void loop()
+{
+  digitalWrite(8,state);
+  int lightlevel;
+  lightlevel = analogRead(0);
+  Serial.println(lightlevel);
+  if (lightlevel < 300){
+    digitalWrite(9, HIGH);
+    Serial.println("ON");
+  }
+  
+  else
+  {
+    digitalWrite(9, LOW);
+    Serial.println("OFF");
+  }  
+}
+void light(){
+  state = !state;
+}
