@@ -1,0 +1,26 @@
+volatile byte state = LOW;
+volatile byte LED = LOW;
+void setup() 
+{
+  Serial.begin(9600);
+  pinMode (9, OUTPUT);
+  pinMode(2, INPUT_PULLUP);
+  pinMode(8, OUTPUT);
+  pinMode(3, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(2), light, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(3), tilt, CHANGE);
+}
+
+void loop()
+{
+  digitalWrite(8,state);
+  digitalWrite(9,LED);
+}
+void light(){
+  state = !state;
+  Serial.println("Interrupt movement");
+}
+void tilt(){
+  LED = !LED;
+  Serial.println("Interrupt tilt");
+}
